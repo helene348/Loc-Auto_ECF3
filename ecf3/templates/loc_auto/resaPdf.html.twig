@@ -1,0 +1,23 @@
+{% for reservation in reservations %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation n° {{reservation.id}}</title>
+</head>
+<body>
+    <h4>Merci pour votre réservation, {{reservation.client.clientNom}}</h4>
+    <h6>Récapitulatif de votre réservation :</h6>
+    <p>Vos dates de réservations : </p>
+    <ul>
+        <li>{{reservation.reservationDebutPrevu}}</li>
+        <li>{{reservation.reservationFinPrevue}}</li>
+    </ul>
+    <br>
+    Véhicule choisi :
+    <ul>
+        <li>{{reservation.vehicule.vehiculeModèle}} - {{reservation.vehicule.vehiculeMarque}} ({{reservation.vehicule.vehiculeImmatriculation}})</li>
+    </ul>
+
+    Merci d'avoir choisi Loc'Auto !
+</body>
+{% endfor %}

@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3>Liste des réservations</h3>
+            <p>Compléter les réservations des clients :</p>
+            <table class="table" data-toggle="table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" data-sortable="true" data-field="id">Identifiant</th>
+                        <th rowspan="2" data-sortable="true" data-field="inscription">Client</th>
+                        <th rowspan="2">Véhicule</th>
+                        <th colspan="2">Réservation</th>
+                        <th colspan="2">Location</th>
+                        <th colspan="2">Kilométrage du véhicule</th>
+                        <th rowspan="2">Quantité de carburant au retour</th>
+                        <th rowspan="2">Actions</th>
+                    </tr>
+                    <tr>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Date de début effective</th>
+                        <th>Date de fin effective</th>
+                        <th>Kilométrage au départ</th>
+                        <th>Kilométrage au retour</th>
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservations in reservations %}
+                    <tr>
+                        <td>{{reservations.id}}</td>
+                        <td>{{reservations.client.clientNom}}</td>
+                        <td>{{reservations.vehicule.vehiculeImmatriculation }} - 
+                            {{reservations.vehicule.vehiculeMarque }} - 
+                            {{reservations.vehicule.vehiculeModele }}
+                        </td>
+                        <td>{{reservations.reservationDebutPrevu| date("d/m/Y H:i")}}</td>
+                        <td>{{reservations.reservationFinPrevue| date("d/m/Y H:i")}}
+                        <td>
+                            {% if reservations.reservationDebutEffectif is null %}
+                                {{"Date à renseigner au départ du client"}}
+                            {% else %}
+                                {{reservations.reservationDebutEffectif| date("d/m/Y H:i")}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if reservations.reservationFinEffective is null %}
+                                {{"Date à renseigner au retour du client"}}
+                            {% else %}
+                                {{reservations.reservationFinEffective| date("d/m/Y H:i")}}
+                            {% endif %}
+                        </td>
+                        <td>{{reservations.reservationKmDebut|number_format(0, ',', ' ')}}</td>
+                        <td>{{reservations.reservationKmFin|number_format(0, ',', ' ')}}</td>
+                        <td>{{reservations.reservationReservoirFin|number_format(2, ',')}}</td>
+                        <td>
+                            <a href="{{ path('edit_resa', {'id': reservations.id}) }}" class="btn btn-info" role="button">Editer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </div>
+
+{% endblock body %}

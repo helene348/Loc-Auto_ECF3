@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4>Liste des véhicules</h4>
+                <table class="table" data-toggle="table" data-pagination="true" data-search="true">
+                    <thead>
+                        <tr>
+                            <th data-sortable="true">Identifiant</th>
+                            <th data-sortable="true">Catégorie</th>
+                            <th data-sortable="true">Type de Véhicule</th>
+                            <th data-sortable="true">Immatriculation</th>
+                            <th>Marque</th>
+                            <th>Modèle</th>
+                            <th data-sortable="true">Carburant</th>
+                            <th>Equipements</th>
+                            <th>Taille du réservoir (en litres)</th>
+                            <th data-sortable="true">Date d'achat</th>
+                            <th data-sortable="true">Date de vente</th>
+                            <th data-sortable="true">Localisation</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vehicule in vehicule %}
+                        <tr>
+                            <td>{{vehicule.id}}</td>
+                            <td>{{vehicule.categories.categorieType}}</td>
+                            <td>{{vehicule.types.typeNom }}</td>
+                            <td>{{vehicule.vehiculeImmatriculation}}</td>
+                            <td>{{vehicule.vehiculeMarque}}</td>
+                            <td>{{vehicule.vehiculeModele}}</td>
+                            <td>{{vehicule.carburants.carburantNom}}</td>
+                            <td>{{vehicule.vehiculeEquipements}} </td>
+                            <td>{{vehicule.vehiculeTailleReservoir}} </td>
+                            <td>{{vehicule.vehiculeDateAchat | date("d/m/Y") }} </td>
+                            <td>
+                                {% if vehicule.vehiculeDateVente is null %}
+                                    {{"Aucune date de vente renseignée"}}
+                                {% else %}
+                                    {{vehicule.vehiculeDateVente | date("d/m/Y") }}
+                                {% endif %}
+                            </td>
+                            <td>{{vehicule.agences.agenceAdresse}} </td>
+                            <td>
+                                <a href="{{ path('edit_vehicule', {'id': vehicule.id}) }}" class="btn btn-info" role="button">Editer</a>
+                                
+                                {% if vehicule.vehiculeDateVente is not null %}
+                                    <a href="{{ path('delete_vehicule', {'id': vehicule.id}) }}" class="btn btn-danger" role="button">Supprimer</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('vehicule_new') }}" class="btn btn-info" role="button">Ajouter un nouveau véhicule</a>
+                <br>
+                
+            </div>
+            <div class="col-12">
+                <h4>Liste des différents types de Véhicules</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type in type %}
+                        <tr>
+                            <td>{{type.id}}</td>
+                            <td>{{type.typeNom}}</td>
+                            <td>
+                                <a href="{{ path('edit_type', {'id': type.id}) }}" class="btn btn-info" role="button">Editer</a>
+                                <a href="{{ path('delete_type', {'id': type.id}) }}" class="btn btn-danger" role="button">Supprimer</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_type') }}" class="btn btn-info" role="button">Ajouter un nouveau type de véhicule</a>
+            </div>
+            <div class="col-12">
+                <h4>Liste des carburants</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for carburant in carburant %}
+                        <tr>
+                            <td>{{carburant.id}}</td>
+                            <td>{{carburant.carburantNom}}</td>
+                            <td>{{carburant.carburantPrix | format_currency('EUR', locale='fr')}}</td>
+                            <td>
+                                <a href="{{ path('edit_carbu', {'id': carburant.id}) }}" class="btn btn-info" role="button">Editer</a>
+                                <a href="{{ path('delete_carbu', {'id': carburant.id}) }}" class="btn btn-danger" role="button">Supprimer</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_carbu') }}" class="btn btn-info" role="button">Ajouter un nouveau carburant</a>
+            </div>
+            <div class="col-12">
+                <h4>Liste des agences</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Adresse</th>
+                            <th>Numéro de téléphone</th>
+                            <th>Adresse mail</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for agence in agence %}
+                        <tr>
+                            <td>{{agence.id}}</td>
+                            <td>{{agence.agenceAdresse}}</td>
+                            <td>{{agence.agenceTelephone}}</td>
+                            <td>{{agence.agenceMail}}</td>
+                            <td>
+                                <a href="{{ path('edit_agence', {'id': agence.id}) }}" class="btn btn-info" role="button">Editer</a>
+                                <a href="{{ path('delete_agence', {'id': agence.id}) }}" class="btn btn-danger" role="button">Supprimer</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_agence') }}" class="btn btn-info" role="button">Ajouter une nouvelle agence</a>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock body %}

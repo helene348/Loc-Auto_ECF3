@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block title %}Loc'Auto - Réserver un véhicule{% endblock %}
+{% block body %}
+    <h4>Réserver un véhicule :</h4>
+    {{ form_start(formReservation) }}
+
+    {{ form_widget(formReservation) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+    
+    {{ form_end(formReservation) }}
+
+    <br>
+{% endblock %}

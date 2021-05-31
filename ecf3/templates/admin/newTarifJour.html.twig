@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container-fluid">
+    {{ form_start(formTarif) }}
+
+
+    {{ form_widget(formTarif) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(formTarif) }}
+    <br>
+</div>
+    
+{% endblock body %}

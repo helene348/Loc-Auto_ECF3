@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% if editMode %}
+        <h2>Informations personnelles</h2>
+        <h3>Complétez/changez le contenu des champs que vous souhaitez modifier :</h3>
+    {% else %}
+        <h2>Inscription</h2>
+        <h3>Remplissez le formulaire ci-dessous pour vous inscrire :</h3> 
+    {% endif %}
+
+    {{ form_start(formInscription) }}
+
+
+    {{ form_row(formInscription.clientNom, {'label': 'Nom et prénom','attr': {'placeholder':'Entrez votre nom et prénom'}})}}
+    {{ form_row(formInscription.clientAdresse, {'label': 'Adresse','attr': {'placeholder':'Entrez votre adresse postale'}})}}
+    {{ form_row(formInscription.clientMail, {'label': 'Adresse mail','attr': {'placeholder':'Entrez votre adresse mail'}})}}
+    {{ form_row(formInscription.clientTelephone, {'label': 'Téléphone','attr': {'placeholder':'Entrez votre numéro de téléphone'}})}}
+    {{ form_row(formInscription.clientLogin, {'label': 'Identifiant','attr': {'placeholder':'Entrez votre identifiant'}})}}
+    {{ form_row(formInscription.clientMdp, {'label': 'Mot de passe','attr': {'placeholder':'Entrez votre mot de passe'}})}}
+    {{ form_row(formInscription.confirmMdp, {'label': 'Mot de passe','attr': {'placeholder':'Confirmez votre mot de passe'}})}}
+    
+    <br>
+
+    {{ form_row(formInscription.clientNumeroPermis, {'label': 'Numéro de permis','attr': {'placeholder':'Entrez le numéro de votre permis de conduire'}})}}
+    {{ form_row(formInscription.clientValiditePermis)}}
+
+
+
+
+    {{ form_widget(formInscription) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(formInscription) }}
+    <br>
+
+{% endblock %}

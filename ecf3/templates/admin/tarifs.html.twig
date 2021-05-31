@@ -1,0 +1,144 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4>Gestion des catégories</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Prix de la caution</th>
+                            <th>Identifiant tarif Jour</th>
+                            <th>Identifiant tarif Week-end</th>
+                            <th>Identifiant tarif Assurance</th>
+                            <th>Actions</th>
+                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categorie in categorie %}
+                        <tr>
+                            <td>{{categorie.categorieType}}</td>
+                            <td>{{categorie.cautionPrix}}</td>
+                            <td>{{categorie.jours.id}}</td>
+                            <td>{{categorie.weekEnds.id}}</td>
+                            <td>{{categorie.assurance.id}}</td>
+                            <td>
+                                <a href="{{ path('edit_categorie', {'id': categorie.id}) }}" class="btn btn-info" role="button">Editer</a>
+                             
+                                
+                                                           
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+    
+                    </tbody>
+                </table>
+                <br>
+                
+                <a href="{{ path('new_categorie') }}" class="btn btn-success" role="button">Ajouter une nouvelle catégorie</a>
+
+                <p>Les catégories dépendent des tarifs week-end, jours ouvrés, ainsi que de l'assurance. Assurez-vous que les tarifs souhaités
+                    soient créés avant de d'ajouter une nouvelle catégorie de véhicules.
+                </p>
+
+            </div>
+            <div class="col-12">
+                <h4>Tarifs du Forfait Jour (ouvrés)</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Prix/Jour</th>
+                            <th>Prix/Km</th>
+                            <th>Heure de début</th>
+                            <th>Heure de fin</th>
+                            <th>Remise pour 3 jours et plus</th>
+                            <th>Date de création</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% for jour in jour %}
+                            <tr>
+                                <td>{{jour.id}}</td>
+                                <td>{{jour.jourPrix | format_currency('EUR', locale='fr')}}</td>
+                                <td>{{jour.jourKmPrix | format_currency('EUR', locale='fr')}}</td>
+                                <td>Lundi à {{jour.jourDebut | date('H:i')}}</td>
+                                <td>Vendredi à {{jour.jourFin | date('H:i')}}</td>
+                                <td>{{ jour.jourRemise|number_format(2, ',') }} %</td>
+                                <td>{{ jour.jourDatePrix | date("d/m/Y") }} </td>
+                            </tr>
+                            {% endfor %}
+
+                     
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_tarif_jour') }}" class="btn btn-success" role="button">Ajouter un nouveau tarif jours ouvrés</a>
+            </div>
+            <div class="col-12">
+                <h4>Tarifs du Forfait Week-end</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Prix/Jour</th>
+                            <th>Prix/Km</th>
+                            <th>Heure de début</th>
+                            <th>Heure de fin</th>
+                            <th>Date de création</th>
+                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for weekend in weekend %}
+                        <tr>
+                            <td>{{weekend.id}}</td>
+                            <td>{{weekend.wkPrix | format_currency('EUR', locale='fr')}}</td>
+                            <td>{{weekend.wkKmPrix | format_currency('EUR', locale='fr')}}</td>
+                            <td>Vendredi à {{weekend.wkDebut | date('H:i')}}</td>
+                            <td>Dimanche à {{weekend.wkFin | date('H:i')}}</td>
+                            <td>{{ weekend.wkDatePrix | date("d/m/Y") }} </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_tarif_wk') }}" class="btn btn-success" role="button">Ajouter un nouveau tarif week-end</a>
+            </div>
+            <div class="col-12">
+                <h4>Tarifs de l'assurance Tout Risques</h4>
+                <table class="table" data-toggle="table" data-pagination="true">
+                    <thead>
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Prix/Jour</th>
+                            <th>Date de création</th>
+                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assurance in assurance %}
+                        <tr>
+                            <td>{{assurance.id}}</td>
+                            <td>{{assurance.assurancePrixJour | format_currency('EUR', locale='fr')}}</td>
+                            <td>{{assurance.assuranceDatePrix | date("d/m/Y") }} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{{ path('new_tarif_assu') }}" class="btn btn-success" role="button">Ajouter un nouveau tarif assurance</a>
+            </div>
+            
+        </div>
+        <br>
+    </div>
+
+{% endblock body %}
+

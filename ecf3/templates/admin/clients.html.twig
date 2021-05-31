@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Liste des clients</h4>
+                    <table class="table" data-toggle="table"  data-search="true" data-pagination="true">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true" data-field="id">Identifiant</th>
+                                <th data-sortable="true" data-field="inscription">Date d'inscription</th>
+                                <th>Prénom et Nom</th>
+                                <th>Adresse</th>
+                                <th>Adresse mail</th>
+                                <th>Téléphone</th>
+                                <th>Login</th>
+                                <th>Numéro de permis</th>
+                                <th>Date validité du permis</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for clients in clients %}
+                            <tr>
+                                <td>{{clients.id}}</td>
+                                <td>{{clients.clientInscription | date("d/m/Y") }}</td>
+                                <td>{{clients.clientNom }}</td>
+                                <td>{{clients.clientAdresse}}</td>
+                                <td>{{clients.clientMail}}</td>
+                                <td>{{clients.clientTelephone}}</td>
+                                <td>{{clients.clientLogin}}</td>
+
+                                <td>{{clients.clientNumeroPermis}} </td>
+                                <td>
+                                    {% if clients.clientValiditePermis is null %}
+                                        Aucune date renseignée
+                                    {% else %}
+                                        {{clients.clientValiditePermis | date("d/m/Y")}}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if clients.clientRole == ["ROLE_ADMIN"] %}
+                                        Administrateur
+                                    {% elseif clients.clientRole == ["ROLE_USER"] %}
+                                        Utilisateur
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('edit_client', {'id': clients.id}) }}" class="btn btn-info" role="button">Editer</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+{% endblock body %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h4>Editer une réservation :</h4>
+
+    {{ form_start(formReservationEdit) }}
+
+    {{ form_widget(formReservationEdit) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(formReservationEdit) }}
+<br>
+
+{% endblock %}

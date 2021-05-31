@@ -1,0 +1,90 @@
+
+
+header{
+  padding-top: 110px;
+}
+
+.navbar li a:hover{
+  background-color: hsla(92, 83%, 43%, 0.86);
+  color:wheat;
+}
+   
+
+.navbar{
+  background-color:hsla(160, 81%, 39%, 1);
+
+}
+.table{
+  border: 1px black;
+}
+
+.navbar img {
+  width: 80px;
+
+}
+
+.footer{
+  padding-top: 10px;
+  width: 100%;
+  background-color: hsla(160, 81%, 39%, 1);
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  
+}
+
+
+.carousel-inner .item{
+  height:300px;
+  background-size:cover;
+  background-position: center center;
+  }
+
+.table-image {
+    vertical-align: middle;
+}
+
+.search {
+  width: 25%;
+  float: right;
+}
+
+.search span {
+  position: right; /*Set search icon*/
+  right: 10px;
+  top: 10px;
+}
+
+.card {
+  margin-bottom: 20px;
+  margin-left: 0;
+}
+
+@media (min-width: 300px) {  
+  a, p, li, td, th, h6 {font-size:0.85rem;} /*1rem = 16px*/
+  h1, h2, h3,h4, h5 {font-size: 1rem;}
+}
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 544px) {  
+  a, p, li, td, th, h6 {font-size:0.85rem;}
+  h1, h2, h3,h4, h5 {font-size:1rem;} /*1rem = 16px*/
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+  a, p, li, td, th, h6 {font-size:0.85rem;}
+  h1, h2, h3,h4, h5 {font-size:1rem;} /*1rem = 16px*/
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  a, p, li, td, th, h6 {font-size:1rem;}
+  h1, h2, h3,h4, h5 {font-size:1.25rem;} /*1rem = 16px*/
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+  a, p, li, td, th, h6 {font-size:1.15rem;}
+  h1, h2, h3,h4, h5 {font-size:1.5rem;} /*1rem = 16px*/    
+}

@@ -1,0 +1,17 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container-fluid">
+    <h2>Nouveau carburant</h2>
+    {{ form_start(formCarbu) }}
+
+
+    {{ form_widget(formCarbu) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(formCarbu) }}
+    <br>
+</div>
+    
+{% endblock body %}

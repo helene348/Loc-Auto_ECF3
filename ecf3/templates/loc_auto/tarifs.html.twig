@@ -1,0 +1,99 @@
+{% extends "base.html.twig" %}
+{% block title %}Loc'Auto - Consulter les grilles de tarifs{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row-2">
+            <div class="col-12">
+                <h3>Nos Tarifs</h3>
+        <br>
+        <h4>Forfait Jour</h4>
+        {% for categorie in categorie %}
+            {% if loop.index0 == 0 %}
+                <p>Grille des tarifs pour une location en semaine (jours ouvrés) du lundi à {{categorie.jours.jourDebut | date('H:i')}}
+                    au vendredi à {{categorie.jours.jourFin | date('H:i')}} </p>
+            {% endif %}
+        {% endfor %}
+            <table class="table table-hover table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Prix/Jour</th>
+                    <th scope="col">Prix/km parcourus</th>
+                    <th scope="col">Caution</th>
+                    <th scope="col">Assurance (non obligatoire) (Prix/Jour)</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for categorie in categorie %}
+                    <tr>
+                        <th scope="row">{{categorie.categorieType}}</th>
+                        <td>{{categorie.jours.jourPrix | format_currency('EUR', locale='fr')}}</td>
+                        <td>{{categorie.jours.jourKmPrix | format_currency('EUR', locale='fr')}}</td>
+                        <td>{{categorie.cautionPrix | format_currency('EUR', locale='fr')}}</td>
+                        <td>{{categorie.assurance.assurancePrixJour | format_currency('EUR', locale='fr')}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% for categorie in categorie %}
+                {% if loop.index0 == 0 %}
+                    <p>Une remise de {{ categorie.jours.jourRemise|number_format(2, ',') }} %
+                        est appliquée pour une location de 3 jours ou plus (hors carburant et hors week-end) </p>
+                {% endif %}
+            {% endfor %}   
+            <br>
+            <h4>Forfait week-end</h4>
+            {% for categorie in categorie %}
+                {% if loop.index0 == 0 %}
+                    <p>Grille des tarifs pour une location le week-end du vendredi à {{categorie.weekEnds.wkDebut | date('H:i')}}
+                        au dimanche à {{categorie.weekEnds.wkFin | date('H:i')}} </p>
+                {% endif %}
+            {% endfor %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Prix/Jour</th>
+                <th scope="col">Prix/km parcourus</th>
+                <th scope="col">Caution</th>
+                <th scope="col">Assurance (non obligatoire) (Prix/Jour)</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for categorie in categorie %}
+            <tr>
+                <th scope="row">{{categorie.categorieType}}</th>
+                <td>{{categorie.weekEnds.wkPrix | format_currency('EUR', locale='fr')}}</td>
+                <td>{{categorie.weekEnds.wkKmPrix | format_currency('EUR', locale='fr')}}</td>
+                <td>{{categorie.cautionPrix | format_currency('EUR', locale='fr')}}</td>
+                <td>{{categorie.assurance.assurancePrixJour | format_currency('EUR', locale='fr')}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h4>Tarifs des carburants</h4>
+            <p>Ces tarifs ne seront appliqués qu'au retour du véhicule, en cas de manque de carburant dans le réservoir.</p>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix (au litre)</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for carburant in carburants %}
+            <tr>
+                <th scope="row">{{carburant.carburantNom}}</th>
+                <td>{{carburant.carburantPrix | format_currency('EUR', locale='fr')}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

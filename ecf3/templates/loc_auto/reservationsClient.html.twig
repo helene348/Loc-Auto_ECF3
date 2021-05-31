@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block title %}Loc'Auto - Voir vos réservations{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            {% for reservations in reservations %}
+                {% if loop.index0 == 0 %}
+                    <h4>Liste de vos réservations, {{reservations.client.clientNom}}</h4>
+                {% endif %}
+            {% endfor %}
+            <table class="table" data-toggle="table">
+                <thead>
+                    <tr>
+                        <th data-sortable="true" data-field="id">Numéro de réservation</th>
+                        <th>Véhicule choisi</th>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservations in reservations %}
+                    <tr>
+                        <td>{{reservations.id}}</td>
+                        <td>{{reservations.vehicule.vehiculeImmatriculation }} - 
+                            {{reservations.vehicule.vehiculeMarque }} - 
+                            {{reservations.vehicule.vehiculeModele }}
+                        </td>
+                        <td>{{reservations.reservationDebutPrevu| date("d/m/Y H:i")}}</td>
+                        <td>{{reservations.reservationFinPrevue| date("d/m/Y H:i")}}</td>
+                        <td>
+                            <a href="{{ path('delete_resa', {'idClient':app.user.id,'id': reservations.id }) }}" class="btn btn-danger" role="button">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+            <br>
+        </div>
+        
+{% endblock body %}

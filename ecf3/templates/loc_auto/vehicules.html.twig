@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Loc'Auto - Choisissez le véhicule qui vous convient{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+    <h3>Nos différents véhicules</h3>
+    <div class="row p-5">
+      {% for vehicule in vehicule %}
+      <div class="col-sm-4">
+        <div class="card border border-success"">
+          <div class="card-body">
+            <h5 class="card-title">{{vehicule.vehiculeModele}} - {{vehicule.vehiculeMarque}}</h5>
+            <br>
+            <p class="card-text">Jours ouvrés : <strong>{{vehicule.categories.jours.jourPrix | format_currency('EUR', locale='fr' )}}/jour</strong></p>
+            <p class="card-text">Week-ends : <strong>{{vehicule.categories.weekEnds.wkPrix | format_currency('EUR', locale='fr' )}}/jour </strong></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Véhicule de catégorie {{vehicule.categories.categorieType}}</li>
+              <li class="list-group-item">Equipements : {{vehicule.vehiculeEquipements}}</li>
+              <li class="list-group-item">Carburant : {{vehicule.carburants.carburantNom}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  
+</div>
+<br>
+
+{% endblock %}
+

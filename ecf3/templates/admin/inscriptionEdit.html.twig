@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% if editMode %}
+
+        <h2>Informations personnelles de {{clients.clientNom}}, role : 
+        <!--                                       
+            {# if clients.clientRole == ["ROLE_ADMIN"]  #}
+                Administrateur
+            {# elseif clients.clientRole == ["ROLE_USER"] #}
+                Utilisateur
+            {# endif #}
+            --> 
+        </h2>
+        <h3>Changez le rôle de {{clients.clientNom}} :</h3>
+
+    {% else %}
+        <h2>Inscription</h2>
+        <h3>Remplissez le formulaire ci-dessous pour vous inscrire :</h3> 
+    {% endif %}
+
+    {{ form_start(formInscriptionAdmin) }}
+
+
+
+    {{ form_widget(formInscriptionAdmin) }}
+    <br>
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(formInscriptionAdmin) }}
+    <br>
+    
+{% endblock %}
